@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">default title</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form th:action="@{/register}" th:object="${user}" method="POST" enctype="utf8" autocomplete="off" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label th:for="firstName">First Name</label>
+                    <input th:field="*{firstName}" class="form-control"/>
+                    <span th:each="error: ${#fields.errors('firstName')}"
+                       th:text="${error}" class="error">Validation error</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label th:for="lastName">Last Name</label>
+                    <input th:field="*{lastName}" class="form-control"/>
+                    <span th:each="error : ${#fields.errors('lastName')}"
+                       th:text="${error}" class="error">Validation error</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label th:for="email">Email</label>
+                    <input type="email" th:field="*{email}" class="form-control"/>
+                    <span th:each="error : ${#fields.errors('email')}"
+                          th:text="${error}" class="error">Validation error</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label th:for="password">Password</label>
+                    <input type="password" th:field="*{password}" class="form-control"/>
+                    <span th:each="error : ${#fields.errors('password')}"
+                       th:text="${error}" class="error">Validation error</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label th:for="matchingPassword">Confirm Password</label>
+                    <input type="password" th:field="*{matchingPassword}" class="form-control"/>
+                    <span th:each="error : ${#fields.errors('matchingPassword')}"
+                          th:text="${error}" class="error">Validation error</span>
+                </div>
+            </div>
+            <input type="submit" value="Register User"/>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a th:href="@{/login.html}" >login</a>
+</div>
+
+</body>
+</html>
