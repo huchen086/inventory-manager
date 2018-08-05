@@ -42,9 +42,10 @@ public class LoginController {
             model.addAttribute("title", "New User Registration");
             model.addAttribute("user",accountDto);
             return "register";
+        } else {
+            createUserAccount(accountDto);
+            return "redirect:/login";
         }
-        createUserAccount(accountDto);
-        return "redirect:/login";
     }
 
     private void createUserAccount(UserDto accountDto) {
