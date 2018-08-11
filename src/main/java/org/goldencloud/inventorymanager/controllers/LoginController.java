@@ -1,7 +1,7 @@
 package org.goldencloud.inventorymanager.controllers;
 
-import org.goldencloud.inventorymanager.DAO.UserDao;
-import org.goldencloud.inventorymanager.DTO.UserDto;
+import org.goldencloud.inventorymanager.models.dao.UserDao;
+import org.goldencloud.inventorymanager.models.dto.UserDto;
 import org.goldencloud.inventorymanager.services.UserService;
 import org.goldencloud.inventorymanager.models.User;
 import org.goldencloud.inventorymanager.validators.EmailExistsException;

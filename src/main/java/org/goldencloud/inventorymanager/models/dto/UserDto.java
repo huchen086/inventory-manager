@@ -1,4 +1,4 @@
-package org.goldencloud.inventorymanager.DTO;
+package org.goldencloud.inventorymanager.models.dto;
 
 import org.goldencloud.inventorymanager.models.Role;
 import org.goldencloud.inventorymanager.validators.PasswordMatches;

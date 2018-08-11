@@ -1,6 +1,6 @@
 package org.goldencloud.inventorymanager.services;
 
-import org.goldencloud.inventorymanager.DAO.UserDao;
+import org.goldencloud.inventorymanager.models.dao.UserDao;
 import org.goldencloud.inventorymanager.models.Role;
 import org.goldencloud.inventorymanager.models.User;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package org.goldencloud.inventorymanager.validators;
 
-import org.goldencloud.inventorymanager.DTO.UserDto;
+import org.goldencloud.inventorymanager.models.dto.UserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

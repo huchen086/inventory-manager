@@ -1,9 +1,12 @@
 package org.goldencloud.inventorymanager.controllers;
 
-import org.goldencloud.inventorymanager.DAO.MerchandiseDao;
+import org.goldencloud.inventorymanager.models.Inventory;
+import org.goldencloud.inventorymanager.models.dao.InventoryDao;
+import org.goldencloud.inventorymanager.models.dao.MerchandiseDao;
 import org.goldencloud.inventorymanager.models.Merchandise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,9 @@ public class MerchandiseController {
 
     @Autowired
     private MerchandiseDao merchandiseDao;
+
+    @Autowired
+    private InventoryDao inventoryDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String displayMerchandise(Model model) {
@@ -34,12 +40,15 @@ public class MerchandiseController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddForm(@ModelAttribute("merchandise") @Valid Merchandise newMerchandise, Errors errors, Model model) {
+    public String processAddForm(@ModelAttribute("merchandise") @Valid Merchandise newMerchandise, BindingResult result, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title","Add New Merchandise");
             model.addAttribute("merchandise",newMerchandise);
             return "merchandise/add";
         } else {
+            Inventory newInventory = new Inventory(newMerchandise,newMerchandise.getInventory().getQuantity());
+            inventoryDao.save(newInventory);
+            newMerchandise.setInventory(newInventory);
             merchandiseDao.save(newMerchandise);
             return "redirect:/merchandise";
         }

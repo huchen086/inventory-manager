@@ -12,12 +12,14 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Quantity</th>
     </tr>
     <tr th:each="merchandise : ${merchandises}">
         <td th:text="${merchandise.sku}"></td>
         <td th:text="${merchandise.name}"></td>
         <td th:text="${merchandise.description}"></td>
         <td th:text="${merchandise.price}"></td>
+        <td th:text="${merchandise.inventory.quantity}"></td>
     </tr>
 </table>
 

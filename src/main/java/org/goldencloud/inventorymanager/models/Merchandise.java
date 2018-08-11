@@ -1,10 +1,7 @@
 package org.goldencloud.inventorymanager.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -28,6 +25,10 @@ public class Merchandise {
     @NotNull
     @Positive (message = "price must be greater than zero")
     private Double price;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "merchandise")
+    //@JoinColumn(name = "sku")
+    private Inventory inventory;
 
     public Merchandise() {
 
@@ -63,5 +64,13 @@ public class Merchandise {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 }

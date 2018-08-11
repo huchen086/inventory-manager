@@ -1,9 +1,9 @@
 package org.goldencloud.inventorymanager.services;
 
 import java.util.Arrays;
-import org.goldencloud.inventorymanager.DAO.RoleDao;
-import org.goldencloud.inventorymanager.DAO.UserDao;
-import org.goldencloud.inventorymanager.DTO.UserDto;
+import org.goldencloud.inventorymanager.models.dao.RoleDao;
+import org.goldencloud.inventorymanager.models.dao.UserDao;
+import org.goldencloud.inventorymanager.models.dto.UserDto;
 import org.goldencloud.inventorymanager.models.Role;
 import org.goldencloud.inventorymanager.validators.EmailExistsException;
 import org.goldencloud.inventorymanager.models.User;
