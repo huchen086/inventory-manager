@@ -3,7 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
-<h1 th:text="${title}">Default title</h1>
+<h1 th:text="${title}+' ('+${merchandises.size()}+')'">Default title</h1>
 <p th:unless="${merchandises} and ${merchandises.size()}">No Merchandise</p>
 
 <table class="table">
