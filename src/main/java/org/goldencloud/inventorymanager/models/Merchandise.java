@@ -2,12 +2,14 @@ package org.goldencloud.inventorymanager.models;
 
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 
 @Entity
-public class Merchandise {
+public class Merchandise implements Serializable {
 
     @Id
     @NotBlank (message = "a SKU# must be provided")
@@ -26,8 +28,9 @@ public class Merchandise {
     @Positive (message = "price must be greater than zero")
     private Double price;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "merchandise")
-    //@JoinColumn(name = "sku")
+    @NotNull
+    @Valid //Spring will also validate form input for merchandise.inventory
+    @OneToOne(mappedBy = "merchandise", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Inventory inventory;
 
     public Merchandise() {

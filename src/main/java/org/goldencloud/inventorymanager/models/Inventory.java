@@ -1,20 +1,20 @@
 package org.goldencloud.inventorymanager.models;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 
 @Entity
-public class Inventory {
+public class Inventory implements Serializable {
     @Id
-    @Column(insertable = false, updatable = false)
+    @Column(unique = true, nullable = false)
     private String sku;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "sku", nullable = false)
+    @Valid
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     private Merchandise merchandise;
 
     @NotNull
