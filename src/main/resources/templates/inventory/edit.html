@@ -5,10 +5,10 @@
 <nav th:replace="fragments :: navigation"></nav>
 <h1 th:text="${title}">Default title</h1>
 
-<h3 th:text="${merchandiseToEdit.name + ' (sku=' + merchandiseToEdit.sku + ')'}"></h3>
+<h3 th:text="${inventoryToEdit.name + ' (sku=' + inventoryToEdit.sku + ')'}"></h3>
 
 <br></br>
-<form method="post" style="max-width:600px" th:object="${merchandiseToEdit}" th:action="@{'/merchandise/edit/' + ${merchandiseToEdit.sku}}">
+<form method="post" style="max-width:600px" th:object="${inventoryToEdit}" th:action="@{'/inventory/edit/' + ${inventoryToEdit.sku}}">
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />
@@ -26,8 +26,8 @@
     </div>
     <div class="form-group">
         <label th:for="quantity">Quantity</label>
-        <input class="form-control" th:field="*{inventory.quantity}" type="number" />
-        <span th:errors="*{inventory.quantity}" class="error"></span>
+        <input class="form-control" th:field="*{inventoryDetail.quantity}" type="number" />
+        <span th:errors="*{inventoryDetail.quantity}" class="error"></span>
     </div>
     <input type="hidden" th:field="*{sku}"/>
     <input type="submit" value="Edit Inventory" />

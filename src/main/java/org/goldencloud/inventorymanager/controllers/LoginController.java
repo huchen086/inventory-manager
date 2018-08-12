@@ -22,8 +22,6 @@ import javax.validation.Valid;
 public class LoginController {
 
     @Autowired
-    private UserDao userDao;
-    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "register", method = RequestMethod.GET)

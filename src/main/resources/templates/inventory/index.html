@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+<h1 th:text="${title}+' ('+${inventories.size()}+')'">Default title</h1>
+<p th:unless="${inventories} and ${inventories.size()}">No Merchandise</p>
+
+<table class="table">
+    <tr>
+        <th>SKU#</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    <tr th:each="inventory : ${inventories}">
+        <td th:text="${inventory.sku}"></td>
+        <td th:text="${inventory.name}"></td>
+        <td th:text="${inventory.description}"></td>
+        <td th:text="${inventory.price}"></td>
+        <td th:text="${inventory.inventoryDetail.quantity}"></td>
+        <td><a th:href="@{'/inventory/edit/' + ${inventory.sku}}">Edit Inventory</a></td>
+    </tr>
+</table>
+
+<a href="/inventory/add" class="btn btn-default">Add New Merchandise</a>
+
+</body>
+</html>
