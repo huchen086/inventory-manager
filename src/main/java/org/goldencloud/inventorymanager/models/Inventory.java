@@ -5,15 +5,17 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import java.io.Serializable;
 
 @Entity
-public class Inventory implements Serializable {
+public class Inventory {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
     @NotBlank (message = "a SKU# must be provided")
     @NotNull
+    @Column (unique = true)
     private String sku;
 
     @NotBlank (message = "name must not be empty")
@@ -25,16 +27,20 @@ public class Inventory implements Serializable {
     private String description;
 
     @NotNull
-    @Positive (message = "price must be greater than zero")
-    private Double price;
-
-    @NotNull
     @Valid //Spring will also validate form input for inventory.inventoryDetail
     @OneToOne(mappedBy = "inventory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private InventoryDetail inventoryDetail;
 
     public Inventory() {
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getSku() {
@@ -59,14 +65,6 @@ public class Inventory implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public InventoryDetail getInventoryDetail() {

@@ -1,17 +1,16 @@
 package org.goldencloud.inventorymanager.controllers;
 
-import org.goldencloud.inventorymanager.models.InventoryDetail;
-import org.goldencloud.inventorymanager.models.dao.InventoryDetailDao;
-import org.goldencloud.inventorymanager.models.dao.InventoryDao;
 import org.goldencloud.inventorymanager.models.Inventory;
+import org.goldencloud.inventorymanager.models.InventoryDetail;
+import org.goldencloud.inventorymanager.models.dao.InventoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
@@ -22,9 +21,6 @@ public class InventoryController {
 
     @Autowired
     private InventoryDao inventoryDao;
-
-    @Autowired
-    private InventoryDetailDao inventoryDetailDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String displayInventory(Model model) {
@@ -50,18 +46,21 @@ public class InventoryController {
             model.addAttribute("title","Add New Merchandise");
             return "inventory/add";
         } else {
-            //Could move the code below to a separate service layer for business logic
-            InventoryDetail newInventoryDetail = new InventoryDetail(newInventory, newInventory.getInventoryDetail().getQuantity());
+            //Could move the code below to a separate service layer for business logic?
+            InventoryDetail newInventoryDetail
+                    = new InventoryDetail(newInventory.getInventoryDetail().getQuantity(),
+                                        newInventory.getInventoryDetail().getPrice());
+            newInventoryDetail.setInventory(newInventory);
             newInventory.setInventoryDetail(newInventoryDetail);
             inventoryDao.save(newInventory);
             return "redirect:/inventory";
         }
     }
 
-    @RequestMapping(value = "edit/{sku}", method = RequestMethod.GET)
-    public String displayEditForm(Model model, @PathVariable String sku) {
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable Long id) {
 
-        Inventory inventoryToEdit = inventoryDao.findById(sku).orElse(null);
+        Inventory inventoryToEdit = inventoryDao.findById(id).orElse(null);
 
         if(inventoryToEdit ==null) {
             return "redirect:/inventory";
@@ -73,8 +72,8 @@ public class InventoryController {
 
     }
 
-    @RequestMapping(value = "edit/{sku}", method = RequestMethod.POST)
-    public String processEditForm(@PathVariable String sku,
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable long id,
                                   @ModelAttribute("inventoryToEdit") @Valid Inventory inventoryToEdit,
                                   BindingResult result,
                                   Errors errors,
@@ -85,7 +84,12 @@ public class InventoryController {
             return "inventory/edit";
         }
 
-        InventoryDetail newInventoryDetail = new InventoryDetail(inventoryToEdit, inventoryToEdit.getInventoryDetail().getQuantity());
+        // set parameters for the newInventoryDetail
+        Inventory newInventory = inventoryDao.findById(id).orElse(null);
+        InventoryDetail newInventoryDetail = newInventory.getInventoryDetail();
+        newInventoryDetail.setQuantity(inventoryToEdit.getInventoryDetail().getQuantity());
+        newInventoryDetail.setPrice(inventoryToEdit.getInventoryDetail().getPrice());
+
         inventoryToEdit.setInventoryDetail(newInventoryDetail);
         inventoryDao.save(inventoryToEdit);
         return "redirect:/inventory";

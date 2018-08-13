@@ -8,7 +8,7 @@
 <h3 th:text="${inventoryToEdit.name + ' (sku=' + inventoryToEdit.sku + ')'}"></h3>
 
 <br></br>
-<form method="post" style="max-width:600px" th:object="${inventoryToEdit}" th:action="@{'/inventory/edit/' + ${inventoryToEdit.sku}}">
+<form method="post" style="max-width:600px" th:object="${inventoryToEdit}" th:action="@{'/inventory/edit/' + ${inventoryToEdit.id}}">
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />
@@ -21,8 +21,8 @@
     </div>
     <div class="form-group">
         <label th:for="price">Price</label>
-        <input class="form-control" th:field="*{price}" type="number" />
-        <span th:errors="*{price}" class="error"></span>
+        <input class="form-control" th:field="*{inventoryDetail.price}" type="number" />
+        <span th:errors="*{inventoryDetail.price}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="quantity">Quantity</label>
