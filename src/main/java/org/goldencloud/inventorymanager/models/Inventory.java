@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Inventory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotBlank (message = "a SKU# must be provided")
@@ -28,7 +28,7 @@ public class Inventory {
 
     @NotNull
     @Valid //Spring will also validate form input for inventory.inventoryDetail
-    @OneToOne(mappedBy = "inventory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "inventory", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private InventoryDetail inventoryDetail;
 
     public Inventory() {

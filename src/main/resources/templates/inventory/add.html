@@ -22,12 +22,12 @@
     </div>
     <div class="form-group">
         <label th:for="price">Price</label>
-        <input class="form-control" th:field="*{inventoryDetail.price}"/>
+        <input class="form-control" type="number" th:field="*{inventoryDetail.price}"/>
         <span class="error" th:errors="*{inventoryDetail.price}"></span>
     </div>
     <div class="form-group">
         <label th:for="quantity">Quantity</label>
-        <input class="form-control" th:field="*{inventoryDetail.quantity}"/>
+        <input class="form-control" type="number" th:field="*{inventoryDetail.quantity}"/>
         <span class="error" th:errors="*{inventoryDetail.quantity}"></span>
     </div>
     <input type="submit" value="Add Merchandise"/>

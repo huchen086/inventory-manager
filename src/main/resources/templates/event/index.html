@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+<h1 th:text="${title}+' ('+${events.size()}+')'">Default title</h1>
+<p th:unless="${events} and ${events.size()}">No Event</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.date}"></td>
+        <td th:text="${event.location}"></td>
+        <td><a th:href="@{'/event/edit/' + ${event.id}}">Edit Event</a></td>
+        <td><a th:href="@{'/event/additemto/' + ${event.id}}">Add Sales Item</a></td>
+    </tr>
+</table>
+
+<a href="/event/add" class="btn btn-default">Add New Event</a>
+
+</body>
+</html>

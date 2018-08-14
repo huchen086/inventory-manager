@@ -1,9 +1,8 @@
 package org.goldencloud.inventorymanager.controllers;
 
-import org.goldencloud.inventorymanager.models.dao.UserDao;
+import org.goldencloud.inventorymanager.models.User;
 import org.goldencloud.inventorymanager.models.dto.UserDto;
 import org.goldencloud.inventorymanager.services.UserService;
-import org.goldencloud.inventorymanager.models.User;
 import org.goldencloud.inventorymanager.validators.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +54,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = {"", "login"}, method= RequestMethod.GET)
+    @RequestMapping(value = "login", method= RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -63,7 +62,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "home")
+    @RequestMapping(value = {"", "home"})
     public String home(Model model) {
         model.addAttribute("title", "Welcome to Golden Cloud!");
         return "home";
