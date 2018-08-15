@@ -6,7 +6,7 @@
 <h1 th:text="${title}+' ('+${events.size()}+')'">Default title</h1>
 <p th:unless="${events} and ${events.size()}">No Event</p>
 
-<table class="table">
+<table class="table" th:if="${not #lists.isEmpty(events)}">
     <tr>
         <th>Name</th>
         <th>Date</th>

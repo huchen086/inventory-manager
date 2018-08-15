@@ -6,7 +6,7 @@
 <h1 th:text="${title}+' ('+${inventories.size()}+')'">Default title</h1>
 <p th:unless="${inventories} and ${inventories.size()}">No Merchandise</p>
 
-<table class="table">
+<table class="table" th:if="${not #lists.isEmpty(inventories)}">
     <tr>
         <th>SKU#</th>
         <th>Name</th>
