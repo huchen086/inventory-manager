@@ -12,14 +12,12 @@
         <th>Date</th>
         <th>Location</th>
         <th></th>
-        <th></th>
     </tr>
     <tr th:each="event : ${events}">
-        <td th:text="${event.name}"></td>
+        <td><a th:href="@{'/event/view/' + ${event.id}}" th:text="${event.name}"></a></td>
         <td th:text="${event.date}"></td>
         <td th:text="${event.location}"></td>
         <td><a th:href="@{'/event/edit/' + ${event.id}}">Edit Event</a></td>
-        <td><a th:href="@{'/event/additemto/' + ${event.id}}">Add Sales Item</a></td>
     </tr>
 </table>
 

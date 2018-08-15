@@ -22,11 +22,9 @@
     </div>
 
     <input type="submit" value="Add Event"/>
+    <p th:text="${errors}" class="error"></p>
 
 </form>
 
-<p th:if="${param.error}" class="error">
-    Adding Event Failed!
-</p>
 </body>
 </html>

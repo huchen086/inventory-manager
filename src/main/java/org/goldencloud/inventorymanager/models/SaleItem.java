@@ -2,7 +2,7 @@ package org.goldencloud.inventorymanager.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 public class SaleItem {
@@ -12,8 +12,8 @@ public class SaleItem {
     private long id;
 
     @NotNull
-    @Positive
-    private int quantity;
+    @PositiveOrZero
+    private int quantity=0;
 
     @NotNull
     @ManyToOne

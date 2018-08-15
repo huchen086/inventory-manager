@@ -30,7 +30,7 @@ public class SaleEvent implements Serializable {
     @NotNull
     private String location;
 
-    @OneToMany(mappedBy = "saleEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "saleEvent", cascade = CascadeType.ALL)
     private List<SaleItem> items = new ArrayList<>();
 
     public SaleEvent() {
