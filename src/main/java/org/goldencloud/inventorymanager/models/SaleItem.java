@@ -11,19 +11,20 @@ public class SaleItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    @PositiveOrZero
-    private int quantity=0;
+    @NotNull(message = "quantity must not be null")
+    @PositiveOrZero(message = "quantity must not be negative")
+    private int quantity;
 
-    @NotNull
+    @NotNull(message = "inventory must not be null")
     @ManyToOne
     private Inventory inventory;
 
-    @NotNull
+    @NotNull(message = "sale event must not be null")
     @ManyToOne
     private SaleEvent saleEvent;
 
     public SaleItem() {
+        quantity = 0;
     }
 
     public SaleItem(int quantity) {

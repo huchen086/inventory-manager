@@ -26,7 +26,7 @@ public class SaleEventService {
     private SaleItemDao saleItemDao;
 
     @Transactional
-    public void initializeNewSaleEvent(SaleEvent event) {
+    public void initializeNewSaleEvent(SaleEvent event) throws NullPointerException {
 
         List<Inventory> inventories = (List<Inventory>) inventoryDao.findAll();
         List<SaleItem> items = new ArrayList<>();
@@ -47,4 +47,5 @@ public class SaleEventService {
 
         saleEventDao.save(event);
     }
+
 }

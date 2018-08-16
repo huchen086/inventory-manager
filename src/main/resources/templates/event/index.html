@@ -6,22 +6,26 @@
 <h1 th:text="${title}+' ('+${events.size()}+')'">Default title</h1>
 <p th:unless="${events} and ${events.size()}">No Event</p>
 
-<table class="table" th:if="${not #lists.isEmpty(events)}">
+<table class="table" style="max-width:600px" th:if="${not #lists.isEmpty(events)}">
+    <thead class="thead-light">
     <tr>
         <th>Name</th>
         <th>Date</th>
         <th>Location</th>
         <th></th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="event : ${events}">
         <td><a th:href="@{'/event/view/' + ${event.id}}" th:text="${event.name}"></a></td>
         <td th:text="${event.date}"></td>
         <td th:text="${event.location}"></td>
-        <td><a th:href="@{'/event/edit/' + ${event.id}}">Edit Event</a></td>
+        <td><a th:href="@{'/event/edit/' + ${event.id}}">Edit Event Info</a></td>
     </tr>
+    </tbody>
 </table>
 
-<a href="/event/add" class="btn btn-default">Add New Event</a>
+<a href="/event/add" type="button" class="btn btn-primary">Add New Event</a>
 
 </body>
 </html>

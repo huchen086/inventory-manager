@@ -17,16 +17,16 @@ public class SaleEvent implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotEmpty
+    @NotEmpty(message = "name must not be empty")
     @NotNull
     private String name;
 
-    @NotNull
+    @NotNull(message = "date must not be empty")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @NotEmpty
+    @NotEmpty(message = "location must not be empty")
     @NotNull
     private String location;
 

@@ -58,7 +58,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
-    public String displayEditForm(Model model, @PathVariable Long id) {
+    public String displayEditForm(Model model, @PathVariable long id) {
 
         Inventory inventoryToEdit = inventoryDao.findById(id).orElse(null);
 

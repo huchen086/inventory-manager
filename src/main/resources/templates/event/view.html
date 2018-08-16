@@ -6,12 +6,15 @@
 
 <h1 th:text="${title}">Default title</h1>
 
-<h4 th:text="${'Name: ' + event.name}"></h4>
-<h4 th:text="${'Date: ' + event.date}"></h4>
-<h4 th:text="${'Location: ' + event.location}"></h4>
+<div>
+    <h5 th:text="${'Name: ' + event.name}"></h5>
+    <h5 th:text="${'Date: ' + event.date}"></h5>
+    <h5 th:text="${'Location: ' + event.location}"></h5>
+    <h5 th:text="${'Gross Sales: ' + event.getTotalAmount()}"></h5>
+</div>
 
-<h4>Sale Items:</h4>
-<table class="table" >
+<h4>Sales Items:</h4>
+<table class="table" style="max-width:600px">
     <tr>
         <th>Name</th>
         <th>Description</th>
@@ -24,6 +27,7 @@
     </tr>
 </table>
 
+<a th:href="@{'/event/quantity/' + ${event.id}}" type="button" class="btn btn-primary">Update Quantity</a>
 
 
 </body>
