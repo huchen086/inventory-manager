@@ -15,11 +15,9 @@ public class SaleItem {
     @PositiveOrZero(message = "quantity must not be negative")
     private int quantity;
 
-    @NotNull(message = "inventory must not be null")
     @ManyToOne
     private Inventory inventory;
 
-    @NotNull(message = "sale event must not be null")
     @ManyToOne
     private SaleEvent saleEvent;
 

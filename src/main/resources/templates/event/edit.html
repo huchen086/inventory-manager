@@ -5,31 +5,30 @@
 <nav th:replace="fragments :: navigation"></nav>
 <h1 th:text="${title}">Default title</h1>
 
-<form method="post" style="max-width:400px" th:action="@{'/event/edit/' + ${event.id}}" th:object="${event}">
+<form method="post" style="max-width:400px" th:object="${event}" th:action="@{'/event/edit/' + ${event.id}}">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}"/>
-        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+        <input class="form-control" type="text" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group" style="max-width:180px">
         <label th:for="date">Date</label>
-        <input class="form-control" type="date" th:field="*{date}"/>
-        <span class="error" th:errors="*{date}"></span>
+        <input class="form-control" type="date" th:field="*{date}" />
+        <span th:errors="*{date}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="location">Location</label>
-        <input class="form-control" th:field="*{location}"/>
-        <span class="error" th:errors="*{location}"></span>
+        <input class="form-control" type="text" th:field="*{location}"/>
+        <span th:errors="*{location}" class="error"></span>
     </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input type="hidden" th:field="*{id}"/>
+    <button type="submit" class="btn btn-primary">SUBMIT</button>
     <button type="reset" class="btn btn-secondary">RESET</button>
 
+    <div th:if="${#fields.hasAnyErrors()}">
+        <p th:each="err : ${#fields.allErrors()}" th:text="${err}">...</p>
+    </div>
 </form>
-
-<div class="alert alert-danger" th:if="${#fields.hasErrors('event.name')}">
-    <p th:each="err : ${#fields.errors('event.name')}" th:text="${err}"></p>
-</div>
 
 </body>
 </html>

@@ -7,17 +7,17 @@
 <form method="post" th:action="@{/inventory/add}" th:object="${inventory}">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}"/>
+        <input class="form-control" type="text" th:field="*{name}"/>
         <span class="error" th:errors="*{name}"></span>
     </div>
     <div class="form-group">
         <label th:for="description">Description</label>
-        <input class="form-control" th:field="*{description}"/>
+        <input class="form-control" type="text" th:field="*{description}"/>
         <span class="error" th:errors="*{description}"></span>
     </div>
     <div class="form-group">
         <label th:for="sku">SKU#</label>
-        <input class="form-control" th:field="*{sku}"/>
+        <input class="form-control" type="text" th:field="*{sku}"/>
         <span class="error" th:errors="*{sku}"></span>
     </div>
     <div class="form-group">

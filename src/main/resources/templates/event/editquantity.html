@@ -27,11 +27,15 @@
             <tr th:each="item, itemStat : *{items}">
                 <td th:text="*{items[__${itemStat.index}__].inventory.name}">name</td>
                 <td th:text="*{items[__${itemStat.index}__].inventory.description}">description</td>
-                <td><input type="number" th:field="*{items[__${itemStat.index}__].quantity}" /></td>
+                <td><input type="number" th:field="*{items[__${itemStat.index}__].quantity}" th:errorclass="fieldError"/>
+                    <span th:errors="*{items[__${itemStat.index}__].quantity}" class="error"></span>
+                </td>
                 <td><input th:hidden="true" th:field="*{items[__${itemStat.index}__].id}" /></td>
             </tr>
             </tbody>
         </table>
+
+        <p th:if="${msg}" th:text="${msg}" class="alert alert-danger" role="alert"></p>
 
         <button type="submit" id="submitButton" th:value="Save" class="btn btn-primary">SAVE</button>
         <button type="reset" id="resetButton" name="reset" th:value="Reset" class="btn btn-secondary">RESET</button>
