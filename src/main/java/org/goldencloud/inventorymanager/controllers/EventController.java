@@ -107,7 +107,12 @@ public class EventController {
         }
 
         List<SaleItem> newItems = itemsForm.getItems();
-        saleItemService.updateQuantity(newItems);
+        try {
+            saleItemService.updateQuantity(newItems);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("msg", e.getMessage());
+            return displayEditQuantity(model,id);
+        }
         return "redirect:/event/view/"+id;
     }
 

@@ -14,6 +14,9 @@ public class SaleItemService {
     @Autowired
     private SaleItemDao saleItemDao;
 
+    @Autowired
+    private InventoryService inventoryService;
+
     @Transactional
     public void updateQuantity(List<SaleItem> newItems) throws NullPointerException {
 
@@ -32,7 +35,10 @@ public class SaleItemService {
             if (theItem == null) {
                 throw new NullPointerException("Sale items not found or invalid");
             }
+            int originalQuantity = theItem.getQuantity();
+            int diff = originalQuantity - newQuantity;
             theItem.setQuantity(newQuantity);
+            inventoryService.updateInventoryQuantity(theItem, diff); //exception, if any, is catched by controller
             saleItemDao.save(theItem);
         }
     }
