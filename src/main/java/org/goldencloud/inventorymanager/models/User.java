@@ -1,11 +1,12 @@
 package org.goldencloud.inventorymanager.models;
 
 
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Email;
-import java.util.ArrayList;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -17,6 +18,7 @@ public class User {
 
     @NotNull(message = "Please provide an email")
     @Email
+    @UniqueElements
     private String email;
 
     @Size(min=6, message = "Your password must have at least 6 characters")

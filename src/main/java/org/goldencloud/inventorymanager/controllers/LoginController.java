@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "register", method = RequestMethod.GET)
+    @RequestMapping(value = {"", "register"}, method = RequestMethod.GET)
     public String register(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
@@ -62,7 +62,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"", "home"})
+    @RequestMapping(value = "home")
     public String home(Model model) {
         model.addAttribute("title", "Welcome to Golden Cloud!");
         return "home";

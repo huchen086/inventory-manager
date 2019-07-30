@@ -24,6 +24,8 @@ public class UserDto {
     @Size(min=6, message="Password must have at least 6 characters")
     private String password;
 
+    @NotNull
+    @NotEmpty
     private String matchingPassword;
 
     @NotNull

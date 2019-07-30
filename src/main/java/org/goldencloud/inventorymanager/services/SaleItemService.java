@@ -38,7 +38,7 @@ public class SaleItemService {
             int originalQuantity = theItem.getQuantity();
             int diff = originalQuantity - newQuantity;
             theItem.setQuantity(newQuantity);
-            inventoryService.updateInventoryQuantity(theItem, diff); //exception, if any, is catched by controller
+            inventoryService.updateInventoryQuantity(theItem, diff); //check if new quantity is valid; exception, if any, is caught by controller
             saleItemDao.save(theItem);
         }
     }

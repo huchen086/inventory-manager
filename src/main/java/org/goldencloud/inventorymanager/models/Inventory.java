@@ -1,6 +1,8 @@
 package org.goldencloud.inventorymanager.models;
 
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +17,7 @@ public class Inventory {
 
     @NotBlank (message = "a SKU# must be provided")
     @NotNull
+    @UniqueElements
     @Column (unique = true)
     private String sku;
 
